@@ -224,6 +224,11 @@ class _CurrentVehicle():
 
             xvm_conf = json.loads(data)
 
+        # add spotting_limit option to old configs (new in 1.6)
+        if not xvm_conf["tankrange"].has_key("spotting_limit"):
+             LOG_NOTE("add missing spotting_limit option")
+             xvm_conf["tankrange"]["spotting_limit"] = True
+
         # Get name
         tank_name = g_itemsCache.items.getVehicle(self.__vehInvID).descriptor.type.name.split(":")[1].lower().replace("-","_")
         if xvm_conf["tankrange"]["logging"]:
